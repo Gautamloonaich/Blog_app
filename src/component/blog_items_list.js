@@ -7,7 +7,7 @@ export  function BlogList(){
     let [value,setvalue]=useState("All");
     
  async function getdata(){
-  let response = await fetch("http://localhost:3001/api");
+  let response = await fetch("http://localhost:3000/api");
   response= await response.json();
    let val=response.result;
    setdata(val);
