@@ -1,6 +1,6 @@
 import { BlogList } from "@/component/blog_items_list";
 import Header from "../component/headerpart";
-import { Fotter } from "@/component/fotter";
+import { Fotter } from "../component/fotter";
 
 export default function Home() {
   return (

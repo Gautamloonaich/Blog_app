@@ -7,7 +7,7 @@ export  function BlogList(){
     let [value,setvalue]=useState("All");
     
  async function getdata(){
-  let response = await fetch("http://localhost:3000/api");
+  let response = await fetch("http://localhost:3000/api_02/blog_api");
   response= await response.json();
    let val=response.result;
    setdata(val);
@@ -32,7 +32,7 @@ export  function BlogList(){
               <div className="mt-9 flex flex-wrap justify-center items-center gap-15 sm:gap-25 columns-auto">
                 {
                    data.filter((item)=>{return (value=="All"? true:item.category==value)}).map((item,key)=>{
-                        return <Blogitem key={key} id={item.id} pic={item.image} category={item.category}  title={item.title} description={item.description}/>
+                        return <Blogitem key={key} id={item._id} pic={item.image} category={item.category}  title={item.title} description={item.description}/>
                        
                     })
                 }

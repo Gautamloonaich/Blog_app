@@ -2,7 +2,7 @@ import { Blog_item_details } from "@/component/blog_item_details";
 
 async function getdata_id(id){
     
-    let response= await fetch("http://localhost:3000/api/"+id);
+    let response= await fetch("http://localhost:3000/api_02/blog_api/"+id);
     response=await response.json();
     return (response.result)
 }

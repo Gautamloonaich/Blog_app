@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { connectionstr } from "../../../../lib/config/db";
 import { bloggmodle } from "../../../../lib/moddles/blogmodle";
 import {writeFile} from "fs/promises";
+
+// Get method Api
 export async function GET(){
     try{
     await mongoose.connect(connectionstr);
@@ -17,7 +19,7 @@ export async function GET(){
 }
 
 
-
+//Post method Api
 export async function POST(request) {
   try {
     await mongoose.connect(connectionstr);
@@ -44,10 +46,10 @@ export async function POST(request) {
     const result = await bloggmodle.create(blogdata);
     console.log(result);
 
-    return NextResponse.json({ msg: "data is added", success: true });
+    return NextResponse.json({ msg: "data is added", success: true },{status:200});
   } catch (err) {
     console.error("POST error:", err); 
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ msg: "error occur",success:false }, { status: 404 });
   }
 }
 
