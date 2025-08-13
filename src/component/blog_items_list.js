@@ -5,12 +5,22 @@ import { Blogitem } from "./blog_item";
 export  function BlogList(){
    let[data,setdata]=useState([]);
     let [value,setvalue]=useState("All");
+    const [loading, setLoading] = useState(true);
+
     
  async function getdata(){
-  let response = await fetch("http://localhost:3000/api_02/blog_api");
+  let response = await fetch("/api_02/blog_api");
   response= await response.json();
    let val=response.result;
    setdata(val);
+      if (Array.isArray(val)) {
+        setdata(val);
+        setLoading(false);
+      } 
+      else{
+        setLoading(true);
+      }
+
  }
  useEffect(()=>{
   getdata();
@@ -31,10 +41,12 @@ export  function BlogList(){
               
               <div className="mt-9 flex flex-wrap justify-center items-center gap-15 sm:gap-25 columns-auto">
                 {
-                   data.filter((item)=>{return (value=="All"? true:item.category==value)}).map((item,key)=>{
+            loading==false ? ( data.filter((item)=>{return (value=="All"? true:item.category==value)}).map((item,key)=>{
                         return <Blogitem key={key} id={item._id} pic={item.image} category={item.category}  title={item.title} description={item.description}/>
                        
-                    })
+                    })) :(
+                      <h1 className=" text-2xl md:text-3xl  ">loading data........</h1>
+                    )
                 }
                   
               </div>

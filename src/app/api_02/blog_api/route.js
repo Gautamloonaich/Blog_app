@@ -1,13 +1,18 @@
-import mongoose from "mongoose";
 import { NextResponse } from "next/server";
-import { connectionstr } from "../../../../lib/config/db";
+import { connectDb } from "../../../../lib/config/db";
 import { bloggmodle } from "../../../../lib/moddles/blogmodle";
 import {writeFile} from "fs/promises";
+
+
+ async function  LoadDB(){
+   await connectDb();
+}
+
+LoadDB();
 
 // Get method Api
 export async function GET(){
     try{
-    await mongoose.connect(connectionstr);
     let data= await bloggmodle.find();
     return NextResponse.json({result:data,success:true})
     }
@@ -22,7 +27,6 @@ export async function GET(){
 //Post method Api
 export async function POST(request) {
   try {
-    await mongoose.connect(connectionstr);
     const formdata = await request.formData();
 
     const timestamp = Date.now();

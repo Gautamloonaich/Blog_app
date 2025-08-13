@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import arrow from "../../public/assets/arrow.png";
 import bloggerlogo from "../../public/assets/logo_light.png";
@@ -6,21 +7,23 @@ import Link from "next/link";
 import facebook from "../../public/assets/facebook_icon.png";
 import google from "../../public/assets/googleplus_icon.png";
 import twitter from "../../public/assets/twitter_icon.png";
+import { useRouter } from "next/navigation";
 
 
 export function Blog_item_details({title,pic,description,author_img,author}){
-    return(<>
+    let route=useRouter();
+    return(
      <div className="">
         
             <div className="px-3 md:px-12 lg:px-30 bg-gray-200 pt-5 pb-25 sm:pb-28  ">
                 <div className=" flex items-center justify-between ">
             <Link href ="/">     <Image className="bg-black w-[150px] sm:w-auto " src={bloggerlogo} alt="blogger_logo"  width={150}  /></Link> 
-                     <button className="border  flex  justify-between items-center font-medium py-0  sm:py-2  px-1 sm:px-5 text-xl sm:text-2xl  gap-1 xs:gap-3 hover:ring-1 hover:ring-black  shadow-[_-4px_4px_2px_rgb(0,0,0)] sm:shadow-[_-4px_4px_2px_rgb(0,0,0)] hover:shadow-[_-7px_7px_4px_rgb(0,0,0)] sm:hover:shadow-[_-7px_7px_4px_rgb(0,0,0)] cursor-pointer">Get Start<Image className="my-2 sm:my-1" src={arrow} alt="arror" width={20} height={20}/></button>
+                     <button className="border  flex  justify-between items-center font-medium py-0  sm:py-2  px-1 sm:px-5 text-xl sm:text-2xl  gap-1 xs:gap-3 hover:ring-1 hover:ring-black  shadow-[_-4px_4px_2px_rgb(0,0,0)] sm:shadow-[_-4px_4px_2px_rgb(0,0,0)] hover:shadow-[_-7px_7px_4px_rgb(0,0,0)] sm:hover:shadow-[_-7px_7px_4px_rgb(0,0,0)] cursor-pointer"onClick={()=>route.push("/admin")}>Get Start<Image className="my-2 sm:my-1" src={arrow} alt="arror" width={20} height={20}/></button>
                 </div>
                 <div className=" flex flex-col mt-12 sm:mt-14 md:mt-16 lg:mt-20 justify-center items-center space-y-10 sm:space-y-8  ">
                     <h1 className=" text-xl sm:text-[22px] md:text-[24px] lg:text-3xl   max-w-100 sm:max-w-120 md:max-w-150 lg:max-w-170 text-center font-medium   ">{title}</h1>
                     <div className="flex flex-col justify-center items-center space-y-2">
-                        <Image src={author_img} height={30} width={50} className=" border-2 border-white rounded-full  h-[50px] w-[50px]"></Image>
+                        <Image src={author_img} height={30} width={50} alt="authorimg" className=" border-2 border-white rounded-full  h-[50px] w-[50px]"></Image>
                     <p className="text-sm sm:text-lg">{author}</p>
                     </div>
         
@@ -32,6 +35,9 @@ export function Blog_item_details({title,pic,description,author_img,author}){
                  <div className="mx-4 flex flex-col items-start justify-center ">
                     <h1 className="text-xl font-medium mb-5">Introduction:</h1>
                  <p className="text-md font-light">{description}</p>
+                 
+
+                 <h1 className="text-red-700 font-light text-lg  mt-25" >This is sample content for testing purposes only. please ignore. </h1>
                  <h1 className="text-lg font-medium mb-3 mt-5">Step 1: Self-Reflection and Goal Setting:</h1>
                  <p className="text-md font-normal">Before you can manage your lifestyle, you must have a clear understanding of what you want to achieve. Start by reflecting on your values, aspirations, and long-term goals.
                       Before you can manage your lifestyle, you must have a clear understanding of what you want to achieve. Start by reflecting on your values, aspirations, and long-term goals.</p>
@@ -74,5 +80,5 @@ export function Blog_item_details({title,pic,description,author_img,author}){
             <Fotter/>
         
      </div>
-    </>)
+    )
 }

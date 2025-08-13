@@ -25,7 +25,7 @@ export function Productform(){
          responde.set("author",data.author);
          responde.set("authorImg",data.authorImg);
          responde.set("image",image);
-         let result=await fetch("http://localhost:3000/api_02/blog_api",{
+         let result=await fetch("/api_02/blog_api",{
             method:"POST",
             body:responde
          });
@@ -69,23 +69,23 @@ export function Productform(){
         <form onSubmit={handleSumbit} className="pl-4 py-7  sm:pl-8  md:pl-15 lg:pl-22   ">
             <p className="text-xl sm:text-2xl font-medium  mb-4">upload thumbnail</p>
             <label htmlFor="upload">
-            <Image src={image==false?uploadarea:URL.createObjectURL(image)} width={150} height={150} alt="uploadarea" className="w-[130] sm:w-[150] "/>
+            <Image src={image==false?uploadarea:URL.createObjectURL(image)} width={150} height={150} alt="uploadarea" className="min-w-[130] sm:min-w-[150] "/>
             </label>
             <input type="file" placeholder="upload file" required id="upload" className="border hidden " onChange={(e)=>setimage(e.target.files[0])}/>
            
            
             <p className="text-xl sm:text-2xl font-medium mt-5 mb-3">Title of Blog</p>
-            <input type="text" id="101" value={data.title} placeholder="Title" className=" text-lg mr-2 sm:text-xl border p-2 sm:p-2.5 w-[300px] sm:w-[450px] md:w-[500px]" onChange={(e)=>handlechange(e,"101")}  />
+            <input type="text" id="101" value={data.title} placeholder="Title" className=" text-lg mr-2 sm:text-xl border p-2 sm:p-2.5 min-w-[300px] sm:min-w-[450px] md:min-w-[500px]" onChange={(e)=>handlechange(e,"101")}  />
 
 
 
             <p className="text-xl sm:text-2xl font-medium mt-5 mb-3">Description of Blog</p>
-            <textarea type="textarea" id="102" value={data.description} placeholder="Description " rows={6} className=" text-md mr-2 sm:text-xl border p-2 sm:p-2.5 w-[300px] sm:w-[450px] md:w-[500px]" onChange={(e)=>handlechange(e,"102")} />
+            <textarea type="textarea" id="102" value={data.description} placeholder="Description " rows={6} className=" text-md mr-2 sm:text-xl border p-2 sm:p-2.5 min-w-[300px] sm:min-w-[450px] md:min-w-[500px]" onChange={(e)=>handlechange(e,"102")} />
 
 
 
             <p className="text-xl sm:text-2xl font-medium mt-5 mb-3">Catagery of Blog</p>
-           <div className="flex flex-col w-[500px] gap-5">
+           <div className="flex flex-col min-w-[500px] gap-5">
           
           
              <select name="category" id="103" value={data.category} className="border rounded-lg w-[120px] p-2" onChange={(e)=>handlechange(e,"103")}>

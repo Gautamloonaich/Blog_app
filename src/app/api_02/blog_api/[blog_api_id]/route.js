@@ -1,12 +1,17 @@
-import mongoose, { Mongoose } from "mongoose";
 import { NextResponse } from "next/server";
-import { connectionstr } from "../../../../../lib/config/db";
+import { connectDb} from "../../../../../lib/config/db";
 import { bloggmodle } from "../../../../../lib/moddles/blogmodle";
+
+ async function  LoadDB(){
+   await connectDb();
+}
+
+LoadDB();
+
 
 //GET method Api by id 
 export async function GET(request,{params}){
    
-  await mongoose.connect(connectionstr);
   let datas= await  bloggmodle.find();
   console.log
     let data= datas.filter((item)=>{
@@ -39,13 +44,12 @@ export async function DELETE(request,{params}){
   let final={_id:ide};
  
   try{
-  await mongoose.connect(connectionstr);
  await bloggmodle.deleteOne(final);
 
   return NextResponse.json({result:"Blog is deleted ",success:true},{status:200})
   }
   catch(err)
   {
-    return NextResponse.json({result:"something wrong Try after some time ",success:false},{status:404})
+    return NextResponse.json({result:"something wrong pls Try again ",success:false},{status:404})
   }
 }

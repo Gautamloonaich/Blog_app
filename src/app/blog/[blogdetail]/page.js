@@ -14,12 +14,12 @@ export  default async function Blogdetail({params}){
     return(
         <>
         {
-            data.map((item)=>{
-                return(
-                <div key={item.id} >
+            data.map((item,key)=>{
+                return (<div key={key} >
                     <Blog_item_details  title={item.title} pic ={item.image} description={item.description} author_img={item.author_img} author={item.author}/>
-                    </div>
-                )
+                    </div>)
+                    
+                
             })
         }
         </>

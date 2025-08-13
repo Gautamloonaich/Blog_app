@@ -11,7 +11,7 @@ export function Blogitem({pic,id,category,title,description}){
             <div className="p-4 space-y-4">
                 <span className="text-white bg-black px-1 flex items-center justify-center w-fit pb-0.5">{category}</span>
                 <h1 className=" text-[18px] sm:text-[25px] leading-tight font-medium ">{title}</h1>
-                <p className="text-md font-light leading-tight">{description}</p>
+                <p className="text-md font-light leading-tight">{description.slice(0,130)}</p>
                <Link href={"/blog/"+id}> <button className=" font-normal flex justify-around items-center gap-2 hover:font-medium cursor-pointer">
                            Read more <Image className="pt-1" alt="arrow" width={15} src={arrow}/>
                 </button></Link>
