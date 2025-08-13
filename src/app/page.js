@@ -4,6 +4,8 @@ import { BlogList } from "@/component/blog_items_list";
 import Header from "../component/headerpart";
 import { Fotter } from "../component/fotter";
 
+// welcome in hero Ui
+
 export default function Home() {
   return (
    <>
@@ -11,6 +13,7 @@ export default function Home() {
     <Header/>
     <BlogList/>
     <Fotter/>
+    
     </>
   );
 }
