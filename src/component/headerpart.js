@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
+
 export default function Header(){
     let [mail , setmail]= useState("");
     let route=useRouter();
@@ -37,6 +38,7 @@ export default function Header(){
         <>
         <div className="px-3 md:px-12 lg:px-30 pt-5  ">
            <div className=" flex items-center justify-between    ">
+            
              <Image className="bg-black w-[150px] sm:w-auto " src={bloggerlogo} alt="blogger_logo"  width={150}  />
              <button className="border  flex  justify-between items-center font-medium py-0  sm:py-2  px-1 sm:px-5 text-xl sm:text-2xl  gap-1 xs:gap-3 hover:ring-1 hover:ring-black  shadow-[_-4px_4px_2px_rgb(0,0,0)] sm:shadow-[_-4px_4px_2px_rgb(0,0,0)] hover:shadow-[_-7px_7px_4px_rgb(0,0,0)] sm:hover:shadow-[_-7px_7px_4px_rgb(0,0,0)] cursor-pointer" onClick={()=>route.push("/admin")}>Get Start<Image className="my-2 sm:my-1" src={arrow} alt="arror" width={20} height={20}/></button>
            </div>
