@@ -1,57 +1,89 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { Blogitem } from "./blog_item";
+import Loader from "@/loader";
 
-export  function BlogList(){
-   let[data,setdata]=useState([]);
-    let [value,setvalue]=useState("All");
-    const [loading, setLoading] = useState(true);
+export function BlogList() {
+  let [data, setdata] = useState([]);
+  let [value, setvalue] = useState("All");
+  const [loading, setLoading] = useState(true);
 
-    
- async function getdata(){
-  let response = await fetch("/api_02/blog_api");
-  response= await response.json();
-   let val=response.result;
-   setdata(val);
-      if (Array.isArray(val)) {
-        setdata(val);
-        setLoading(false);
-      } 
-      else{
-        setLoading(true);
-      }
+  async function getdata() {
+    let response = await fetch("/api_02/blog_api");
+    response = await response.json();
+    let val = response.result;
+    setdata(val);
+    if (Array.isArray(val)) {
+      setdata(val);
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+  }
+  useEffect(() => {
+    getdata();
+  }, []);
+  return (
+    <>
+      <div className=" mx-1 sm:mx-3 mt-10 sm:mt-25 space-y-13 sm:space-y-15">
+        <div className=" mx-2 sm:mx-3 flex justify-center gap-1 font-medium  sm:font-black  sm:gap-8 md:gap-12 [&>*]:px-2 sm:[&>*]:px-5 [&>*]:py-1 sm:[&>*]:py-3 text-[18px] sm:text-xl md:text-2xl  ">
+          <button
+            onClick={() => setvalue("All")}
+            className={value == "All" ? "bg-black text-white rounded-xl" : ""}
+          >
+            All
+          </button>
+          <button
+            onClick={() => setvalue("Technology")}
+            className={
+              value == "Technology" ? "bg-black text-white rounded-xl" : ""
+            }
+          >
+            Technology
+          </button>
+          <button
+            onClick={() => setvalue("Startup")}
+            className={
+              value == "Startup" ? "bg-black text-white rounded-xl" : ""
+            }
+          >
+            Startup
+          </button>
+          <button
+            onClick={() => setvalue("Lifestyle")}
+            className={
+              value == "Lifestyle" ? "bg-black text-white rounded-xl" : ""
+            }
+          >
+            Lifestyle
+          </button>
+        </div>
 
- }
- useEffect(()=>{
-  getdata();
- },[])
-    return(
-        <>
-        
-          
-          <div className=" mx-1 sm:mx-3 mt-10 sm:mt-25 space-y-13 sm:space-y-15">
-            <div className=" mx-2 sm:mx-3 flex justify-center gap-1 font-medium  sm:font-black  sm:gap-8 md:gap-12 [&>*]:px-2 sm:[&>*]:px-5 [&>*]:py-1 sm:[&>*]:py-3 text-[18px] sm:text-xl md:text-2xl  ">
-                <button  onClick={()=>setvalue("All")} className= {value=="All" ? "bg-black text-white rounded-xl":"" }>All</button>
-                <button onClick={()=>setvalue("Technology")} className = {value=="Technology" ? "bg-black text-white rounded-xl":"" }>Technology</button>
-                <button onClick={()=>setvalue("Startup")} className= {value=="Startup" ? "bg-black text-white rounded-xl":"" }>Startup</button>
-                <button onClick={()=>setvalue("Lifestyle")}className= {value=="Lifestyle" ? "bg-black text-white rounded-xl":"" }>Lifestyle</button>
-
-
-            </div>
-              
-              <div className="mt-9 flex flex-wrap justify-center items-center gap-15 sm:gap-25 columns-auto">
-                {
-            loading==false ? ( data.filter((item)=>{return (value=="All"? true:item.category==value)}).map((item,key)=>{
-                        return <Blogitem key={key} id={item._id} pic={item.image} category={item.category}  title={item.title} description={item.description}/>
-                       
-                    })) :(
-                      <h1 className=" text-2xl md:text-3xl  ">loading data........</h1>
-                    )
-                }
-                  
-              </div>
-          </div>
-      
-        </>
-    )
+        <div className="mt-9 flex flex-wrap justify-center items-center gap-15 sm:gap-25 columns-auto">
+          {loading == false ? (
+            data
+              .filter((item) => {
+                return value == "All" ? true : item.category == value;
+              })
+              .map((item, key) => {
+                return (
+                  <Blogitem
+                    key={key}
+                    id={item._id}
+                    pic={item.image}
+                    category={item.category}
+                    title={item.title}
+                    description={item.description}
+                  />
+                );
+              })
+          ) : (
+            <h1 className=" text-2xl md:text-3xl text-center  ">
+              <Loader />
+            </h1>
+          )}
+        </div>
+      </div>
+    </>
+  );
 }
