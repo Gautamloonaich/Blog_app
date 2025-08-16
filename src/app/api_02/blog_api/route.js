@@ -1,28 +1,23 @@
 import { NextResponse } from "next/server";
 import { connectDb } from "../../../../lib/config/db";
 import { bloggmodle } from "../../../../lib/moddles/blogmodle";
-import {writeFile} from "fs/promises";
+import { writeFile } from "fs/promises";
 
-
- async function  LoadDB(){
-   await connectDb();
+async function LoadDB() {
+  await connectDb();
 }
 
 LoadDB();
 
 // Get method Api
-export async function GET(){
-    try{
-    let data= await bloggmodle.find();
-    return NextResponse.json({result:data,success:true})
-    }
-    catch(err)
-    {
-    return NextResponse.json({result:"data is not found ",success:false })
-
-    }
+export async function GET() {
+  try {
+    let data = await bloggmodle.find();
+    return NextResponse.json({ result: data, success: true });
+  } catch (err) {
+    return NextResponse.json({ result: "data is not found ", success: false });
+  }
 }
-
 
 //Post method Api
 export async function POST(request) {
@@ -37,7 +32,6 @@ export async function POST(request) {
     const path = `./public/${timestamp}${image.name}`;
     await writeFile(path, buffer);
     const imgUrl = `/${timestamp}${image.name}`;
-    console.log("url path is :",imgUrl);
     const blogdata = {
       title: formdata.get("title"),
       description: formdata.get("description"),
@@ -48,27 +42,15 @@ export async function POST(request) {
     };
 
     const result = await bloggmodle.create(blogdata);
-    console.log(result);
 
-    return NextResponse.json({ msg: "data is added", success: true },{status:200});
+    return NextResponse.json(
+      { msg: "data is added", success: true },
+      { status: 200 }
+    );
   } catch (err) {
-    console.error("POST error:", err); 
-    return NextResponse.json({ msg: "error occur",success:false }, { status: 404 });
+    return NextResponse.json(
+      { msg: "error occur", success: false },
+      { status: 404 }
+    );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,21 +1,16 @@
-import Image from "next/image";
-import bloglogo from "../../../../public/assets/logo_light.png"
-import author from "../../../../public/assets/profile_icon.png"
-import Link from "next/link";
 import { Suscription } from "@/component/Suscription_emails";
+import Addnavbar from "@/navbars/comman_navbar";
 
-export default function Suscription_id(){
-    return(
-        
-       <div className="ml-0  md:ml-63 lg:ml-80 xl:ml-100">
-              <ul  className="flex items-center justify-between py-6 sm:py-5 px-2 xs:px-5 sm:px-7 w-[100%] sm:w-[100%]   ">
-                    <li className=" hidden md:block sm:text-2xl  md:text-3xl  lg:text-3xl font-bold md:font-medium order:2 md:order:1 "> Suscription List</li>        
-                    <Link href="/"><li className="block md:hidden order-2 md:order-1"> <Image src={bloglogo} alt="logo"  height={200} width={200} className="sm:w-[200px] w-[170px]" /></li></Link>
-                    <li className="order-3 md:order-3"> <Image src={author} alt="author" height={50} width={50} className=""/></li>       
-              </ul>
-
-              <Suscription/>
-       </div>
-        
-    )
+export default function Suscription_id() {
+  return (
+    <div className="ml-0  md:ml-63 lg:ml-75 xl:ml-100  2xl:ml-110">
+      <div className="pl-0 sm:pl-8 md:pl-11 lg:pl-17 sm:pr-8 ">
+        <Addnavbar suscription="Suscribed Gmails" />
+      </div>
+      <h1 className="text-center my-3 font-medium  text-2xl block md:hidden">
+        All Suscriptions
+      </h1>
+      <Suscription />
+    </div>
+  );
 }
